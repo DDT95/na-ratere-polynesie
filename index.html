@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>Nā Rātere — Trouver mon trajet</title>
+  <meta name="description" content="Trouvez simplement votre trajet en bus, ferry ou avion en Polynésie française." />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="na-ratere-v9.css" />
+</head>
+<body>
+  <main class="map-app">
+    <div id="map" aria-label="Carte routière interactive de Polynésie française"></div>
+
+    <section class="search-panel" aria-label="Rechercher un itinéraire">
+      <header class="app-header">
+        <a class="brand" href="#" aria-label="Nā Rātere"><span class="brand-mark"><i class="ph ph-navigation-arrow"></i></span><span><b>NĀ RĀTERE</b><small>MON TRAJET EN POLYNÉSIE</small></span></a>
+        <span class="local-time" id="local-time">--:--</span>
+      </header>
+
+      <div class="search-title"><h1>Où voulez-vous aller&nbsp;?</h1><p>Bus, ferry et avion dans un seul itinéraire.</p></div>
+
+      <form id="route-form">
+        <div class="route-fields">
+          <span class="route-rail"><i></i><b></b><i></i></span>
+          <label><span>Départ</span><input id="origin-input" list="place-options" value="Papeete" autocomplete="off" /></label>
+          <button type="button" id="locate-button" class="field-action" aria-label="Utiliser ma position"><i class="ph ph-crosshair"></i><span>Ma position</span></button>
+          <label><span>Arrivée</span><input id="destination-input" list="place-options" placeholder="Rechercher une île ou un lieu" autocomplete="off" /></label>
+          <button type="button" id="swap-button" class="swap-button" aria-label="Inverser le trajet"><i class="ph ph-arrows-down-up"></i></button>
+        </div>
+        <datalist id="place-options"></datalist>
+        <button class="route-button" id="route-button" type="submit"><i class="ph ph-route"></i> Calculer mon trajet</button>
+      </form>
+
+      <div class="popular" id="popular-destinations"><span>Destinations fréquentes</span><div><button data-destination="Vaiare, Moorea"><i class="ph ph-boat"></i> Moorea</button><button data-destination="Aéroport de Tahiti-Faa’a"><i class="ph ph-airplane-takeoff"></i> Aéroport</button><button data-destination="Teahupo’o"><i class="ph ph-wave-sine"></i> Teahupo’o</button></div></div>
+      <div class="location-message" id="location-message" role="status"></div>
+    </section>
+
+    <section class="result-sheet" id="result-sheet" aria-live="polite">
+      <div class="sheet-handle"></div>
+      <button class="close-result" id="close-result" aria-label="Fermer l’itinéraire"><i class="ph ph-x"></i></button>
+      <div class="result-heading"><p id="result-route">Papeete → Moorea</p><h2><span id="result-duration">1 h 05</span><small id="result-detail">départ maintenant</small></h2></div>
+      <div class="mode-summary" id="mode-summary"></div>
+      <button class="toggle-details" id="toggle-details" type="button" aria-expanded="false">Détails <i class="ph ph-caret-up"></i></button>
+      <ol class="steps" id="route-steps"></ol>
+      <div class="route-tip" id="route-tip"><i class="ph ph-lightbulb"></i><span></span></div>
+      <a class="official-button" id="official-button" href="#" target="_blank" rel="noreferrer">Vérifier les horaires officiels <i class="ph ph-arrow-square-out"></i></a>
+    </section>
+
+    <button class="floating-locate" id="floating-locate" aria-label="Centrer sur ma position"><i class="ph ph-crosshair"></i></button>
+    <div class="zoom-tools"><button id="zoom-in" aria-label="Zoomer"><i class="ph ph-plus"></i></button><button id="zoom-out" aria-label="Dézoomer"><i class="ph ph-minus"></i></button></div>
+    <div class="map-note" id="map-note"><i class="ph ph-info"></i> Horaires indicatifs — confirmez auprès des opérateurs.</div>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="na-ratere-v9.js"></script>
+</body>
+</html>
